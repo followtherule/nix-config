@@ -14,7 +14,10 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./sops.nix
+    ./nvidia.nix
   ];
+
+  nixpkgs.config.allowUnfree = lib.mkDefault true; # for nvidia driver
 
   # move old root subvolume to /btrfs_tmp/old_roots, delete after 30 days, mount new blank root subvolume
   # boot.initrd.systemd = {
@@ -90,7 +93,7 @@
   # };
 
   # Enable the X11 windowing system.
-  # services.xserver.enable = true;
+  services.xserver.enable = true;
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";

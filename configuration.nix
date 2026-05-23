@@ -13,6 +13,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./sops.nix
   ];
 
   # move old root subvolume to /btrfs_tmp/old_roots, delete after 30 days, mount new blank root subvolume
@@ -57,6 +58,12 @@
   #     '';
   #   };
   # };
+
+  # Enable the Flakes feature and the accompanying new nix command-line tool
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -107,13 +114,18 @@
   users.mutableUsers = false; # needed for hashedPasswordFIle not conflict with initialPassword
   users.users.politecat = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       # tree
     ];
     # initialPassword = "12345";
     hashedPasswordFile = "/persist/passwd/politecat";
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOGetBojxlWNeKwUfLdR0Q9RZ0oUTtWPghaxax/XZUWD politecat@archlinux" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOGetBojxlWNeKwUfLdR0Q9RZ0oUTtWPghaxax/XZUWD politecat@archlinux"
+    ];
   };
 
   # programs.firefox.enable = true;

@@ -116,6 +116,7 @@
           ];
 
           files = [
+            ".config/sops/age/keys.txt"
             # ".histfile"
           ];
         };

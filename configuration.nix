@@ -107,12 +107,13 @@
   users.mutableUsers = false; # needed for hashedPasswordFIle not conflict with initialPassword
   users.users.politecat = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       # tree
     ];
     # initialPassword = "12345";
     hashedPasswordFile = "/persist/passwd/politecat";
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOGetBojxlWNeKwUfLdR0Q9RZ0oUTtWPghaxax/XZUWD politecat@archlinux" ];
   };
 
   # programs.firefox.enable = true;
@@ -142,7 +143,7 @@
     settings = {
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
-      PermitRootLogin = false;
+      PermitRootLogin = "no";
       AllowUsers = [ "politecat" ];
     };
   };

@@ -15,6 +15,7 @@
     ./hardware-configuration.nix
     ./sops.nix
     ./nvidia.nix
+    ./jellyfin.nix
   ];
 
   nixpkgs.config.allowUnfree = lib.mkDefault true; # for nvidia driver
@@ -166,7 +167,9 @@
   services.fail2ban.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [
+    8096 # for jellyfin
+  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

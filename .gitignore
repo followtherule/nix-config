@@ -1,0 +1,3 @@
+.sops.yaml
+facter.json
+secrets/

@@ -13,9 +13,18 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./users.nix
     ./sops.nix
     ./nvidia.nix
     ./jellyfin.nix
+    ./deluge.nix
+    ./arr
+    ./networking.nix
+    ./gc.nix
+    ./tailscale.nix
+    ./navidrome.nix
+    # ./slskd.nix
+    ./kernel.nix
   ];
 
   nixpkgs.config.allowUnfree = lib.mkDefault true; # for nvidia driver
@@ -73,17 +82,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "tomori"; # Define your hostname.
-
-  # Configure network connections interactively with nmcli or nmtui.
-  networking.networkmanager.enable = true;
-
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  time.timeZone = "Asia/Taipei";
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
@@ -114,24 +114,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.mutableUsers = false; # needed for hashedPasswordFIle not conflict with initialPassword
-  users.users.politecat = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-    ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      # tree
-    ];
-    # initialPassword = "12345";
-    hashedPasswordFile = "/persist/passwd/politecat";
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOGetBojxlWNeKwUfLdR0Q9RZ0oUTtWPghaxax/XZUWD politecat@archlinux"
-    ];
-  };
-
   # programs.firefox.enable = true;
 
   # List packages installed in system profile.
@@ -139,7 +121,9 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
+    just
     mergerfs
+    wireguard-tools
     #   wget
   ];
 
@@ -165,14 +149,6 @@
     };
   };
   services.fail2ban.enable = true;
-
-  # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [
-    8096 # for jellyfin
-  ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

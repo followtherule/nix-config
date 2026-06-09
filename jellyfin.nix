@@ -7,4 +7,8 @@
     pkgs.jellyfin-web
     pkgs.jellyfin-ffmpeg
   ];
+
+  networking.firewall.allowedTCPPorts = [
+    8096
+  ];
 }

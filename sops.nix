@@ -1,8 +1,10 @@
 { config, ... }:
 
 {
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  sops.defaultSopsFile = "/home/politecat/nix-config/secrets/secrets.yaml";
   sops.defaultSopsFormat = "yaml";
+  # disable verifying encrypted sops files during nixos-rebuild
+  sops.validateSopsFiles = false;
 
   # sops private key to decrypt secrets
   sops.age.keyFile = "/home/politecat/.config/sops/age/keys.txt";

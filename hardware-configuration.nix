@@ -23,7 +23,9 @@
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [
+    # "kvm-amd"
+  ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
@@ -79,7 +81,7 @@
     device = "/dev/disk/by-label/WCC4M4VTXD46";
     fsType = "xfs";
   };
-  fileSystems."/media" = {
+  fileSystems."/data" = {
     depends = [
       "/mnt/disk/hdd/2T-WCC4M4VTXZ9Z"
       "/mnt/disk/hdd/2T-WCC4M4VTXD46"

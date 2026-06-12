@@ -23,7 +23,7 @@
     ./gc.nix
     ./tailscale.nix
     ./navidrome.nix
-    # ./slskd.nix
+    ./slskd.nix
     ./kernel.nix
   ];
 
@@ -82,6 +82,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # run memtest86+efi
+  boot.loader.systemd-boot.memtest86.enable = false;
+
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
 
@@ -124,6 +127,7 @@
     just
     mergerfs
     wireguard-tools
+    memtest86-efi
     #   wget
   ];
 

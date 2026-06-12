@@ -10,7 +10,7 @@
     extraGroups = [
       "wheel"
       "networkmanager"
-      "kvm"
+      # "kvm"
       # "libvirtd"
     ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
@@ -28,5 +28,4 @@
     group = "media";
   };
   users.groups.media = { };
-
 }

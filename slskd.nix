@@ -39,4 +39,10 @@
     };
   };
 
+  networking.firewall.allowedTCPPorts = [
+    5030
+    5031
+    50300
+  ];
+
 }

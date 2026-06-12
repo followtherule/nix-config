@@ -9,5 +9,4 @@
     ./seerr.nix
     ./sonarr.nix
   ];
-
 }

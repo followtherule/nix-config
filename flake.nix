@@ -4,7 +4,6 @@
 
     preservation.url = "github:nix-community/preservation";
     sops-nix.url = "github:Mic92/sops-nix";
-    # sops-nix.url = "github:Mic92/sops-nix/c591bf665727040c6cc5cb409079acb22dcce33c";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";

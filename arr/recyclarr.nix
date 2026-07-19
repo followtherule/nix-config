@@ -259,19 +259,4 @@
     user = "media";
     group = "media";
   };
-
-  sops = {
-    secrets = {
-      radarr-api-key = {
-        mode = "0440";
-        owner = config.users.users.media.name;
-        group = config.users.users.media.group;
-      };
-      sonarr-api-key = {
-        mode = "0440";
-        owner = config.users.users.media.name;
-        group = config.users.users.media.group;
-      };
-    };
-  };
 }

@@ -7,10 +7,17 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    # wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
+    # wrappers.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
-    inputs@{ self, nixpkgs, ... }:
+    inputs@{
+      self,
+      nixpkgs,
+      ...
+    }:
     {
       nixosConfigurations.tomori = inputs.nixpkgs.lib.nixosSystem {
         modules = [

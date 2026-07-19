@@ -25,6 +25,14 @@
     ./navidrome.nix
     ./slskd.nix
     ./kernel.nix
+    ./caddy.nix
+    ./home-assistant.nix
+    ./postgresql.nix
+    ./samba.nix
+    ./neovim.nix
+    ./zsh.nix
+    ./mpd.nix
+    ./pipewire.nix
   ];
 
   nixpkgs.config.allowUnfree = lib.mkDefault true; # for nvidia driver
@@ -122,7 +130,7 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     just
     mergerfs

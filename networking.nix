@@ -31,4 +31,10 @@
   networking.firewall.checkReversePath = "loose";
   networking.networkmanager.dns = "systemd-resolved";
   services.resolved.enable = true;
+
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+    5201 # for iperf3
+  ];
 }

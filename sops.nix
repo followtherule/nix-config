@@ -10,12 +10,30 @@
   sops.age.keyFile = "/home/politecat/.config/sops/age/keys.txt";
 
   # key attrs defined in sops file (secrets/secrets.yaml)
-  # To edit secrets/secrets.yaml: sops secrets/secrets.yaml
+  # To edit secrets/secrets.yaml:
+  # $ just shell sops
+  # $ sops secrets/secrets.yaml
   # To access secrets: cat /run/secrets/myservice/my_subdir/my_secret
   sops.secrets.example_key = { };
   sops.secrets."myservice/my_subdir/my_secret" = {
     # secrets owned by root by default
     # owner = config.users.users.politecat.name;
+  };
+
+  sops = {
+    secrets = {
+      samba = { };
+      radarr-api-key = {
+        mode = "0440";
+        owner = config.users.users.media.name;
+        group = config.users.users.media.group;
+      };
+      sonarr-api-key = {
+        mode = "0440";
+        owner = config.users.users.media.name;
+        group = config.users.users.media.group;
+      };
+    };
   };
 
   # example to make service access secret files

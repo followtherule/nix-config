@@ -16,8 +16,14 @@ test:
 vm:
   nixos-rebuild build-vm --flake . --sudo
 
-shell PKG:
-  nix shell nixpkgs\#{{PKG}}
+shell +PKGS:
+  #!/usr/bin/env bash
+  set -e
+  pkgs=""
+  for PKG in {{PKGS}}; do
+    pkgs+=" nixpkgs#$PKG"
+  done
+  nix shell $pkgs
 
 run PKG:
   nix run nixpkgs\#{{PKG}}

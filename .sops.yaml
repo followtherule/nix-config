@@ -1,0 +1,7 @@
+keys:
+  - &tomori age1srkl3sktg984l6kpllsj9shkc98a4gmk84u2xu72hqev8nznf32qp2xvdf
+creation_rules:
+  - path_regex: secrets/secrets.yaml$
+    key_groups:
+      - age:
+          - *tomori
